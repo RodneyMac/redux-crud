@@ -7,6 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 const UserForm = () => {
   const users = useSelector((state) => state.users);
   const [user, setUser] = useState({username: "", email: ""});
+  const [amountWrittenUsername, setAmountWrittenUsername] = useState(0);
+  const [amountWrittenEmail, setAmountWrittenEmail] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -16,6 +18,12 @@ const UserForm = () => {
       ...user,
       [e.target.name]: e.target.value,
     });
+
+    if(e.target.name === "username") {
+     setAmountWrittenUsername(e.target.value.length);      
+    } else if(e.target.name === "email") {
+      setAmountWrittenEmail(e.target.value.length);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -51,6 +59,9 @@ const UserForm = () => {
               value={user.username}
               autoFocus
             />
+            <div className="d-flex justify-content-end text-info">Typed quantity:
+              <div className="text-warning mx-2">{amountWrittenUsername}</div>
+            </div>
           </div>
           <div className="mt-4">
             <input
@@ -61,6 +72,9 @@ const UserForm = () => {
               onChange={handleChange}
               value={user.email}
             />
+            <div className="d-flex justify-content-end text-info">Typed quantity:
+              <div className="text-warning mx-2">{amountWrittenEmail}</div>
+            </div>
           </div>
           <div className="mt-4 text-center">
             <button className="btn btn-outline-primary" onClick={handleSubmit}>Save</button>
