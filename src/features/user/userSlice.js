@@ -5,6 +5,16 @@ const initialState = [
     id: "1",
     username: "John",
     email: "userjohn@gmail.com"
+  },
+  {
+    id: "2",
+    username: "George",
+    email: "usergeorge@gmail.com"
+  },
+  {
+    id: "3",
+    username: "Paul",
+    email: "userpaul@gmail.com"
   }
 ]
 
@@ -14,7 +24,8 @@ export const userSlice = createSlice({
   reducers: {
     addUser: (state, action) => {
       state.push(action.payload);
-    }
+    },
+    
   }
 });
 
