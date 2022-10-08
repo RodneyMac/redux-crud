@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addUser } from "../../features/user/userSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, editUser } from "../../features/user/userSlice";
 import {v4 as uuid} from "uuid";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UserForm = () => {
-  // const users = useSelector((state) => state.users);
+  const users = useSelector((state) => state.users);
   const [user, setUser] = useState({username: "", email: ""});
-
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
+  const params = useParams();
 
   const handleChange = (e) => {
     setUser({
@@ -21,12 +20,22 @@ const UserForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addUser({
-      ...user,
-      id: uuid()
-    }));
+    if(params.id) {
+      dispatch(editUser(user));
+    } else {
+      dispatch(addUser({
+        ...user,
+        id: uuid()
+      }));
+    }
     navigate("/");
   }
+
+  useEffect(() => {
+    if(params.id) {
+      setUser(users.find((user) => user.id === params.id));
+    }
+  }, [params.id, user]);
 
   return (
     <div className="d-flex justify-content-center align-items-center">

@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import {Link} from "react-router-dom";
 
 const UserList = () => {
   const users = useSelector((state) => state.users);
@@ -22,7 +23,7 @@ const UserList = () => {
               Email: <div className="text-white mx-1">{item.email}</div>
             </div>
             <div className="d-flex justify-content-between mt-2">
-              <button className="btn btn-outline-secondary">Edit</button>
+              <Link to={`/edit-user/${item.id}`} className="btn btn-outline-secondary">Edit</Link>
               <button className="btn btn-outline-danger">Delete</button>
             </div>
             <hr className="text-secondary mt-2" />
