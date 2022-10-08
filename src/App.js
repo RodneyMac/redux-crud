@@ -7,7 +7,7 @@ import UserForm from "./components/UserForm/UserForm";
 
 function App() {
   return (
-    <div>
+    <div className="w-full">
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>}/>
