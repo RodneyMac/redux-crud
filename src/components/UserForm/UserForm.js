@@ -43,7 +43,7 @@ const UserForm = () => {
     if(params.id) {
       setUser(users.find((user) => user.id === params.id));
     }
-  }, [params.id, user]);
+  }, [params.id]);
 
   return (
     <div className="d-flex justify-content-center align-items-center">
